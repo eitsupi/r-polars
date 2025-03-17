@@ -39,6 +39,9 @@ type ThreadComStorage = InitCell<std::sync::RwLock<Option<ThreadCom<RFnSignature
 static CONFIG: ThreadComStorage = InitCell::new();
 pub use crate::rbackground::RBGPOOL;
 
+use std::sync::OnceLock;
+pub static R_PACKAGE_NAME: OnceLock<String> = OnceLock::new();
+
 // Macro to generate exports
 #[cfg(not(feature = "sql"))]
 extendr_module! {

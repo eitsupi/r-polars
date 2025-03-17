@@ -128,6 +128,8 @@ rust_polars_version <- function() .Call(wrap__rust_polars_version)
 
 thread_pool_size <- function() .Call(wrap__thread_pool_size)
 
+set_package_name <- function(name) .Call(wrap__set_package_name, name)
+
 enable_string_cache <- function() .Call(wrap__enable_string_cache)
 
 disable_string_cache <- function() .Call(wrap__disable_string_cache)

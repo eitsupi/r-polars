@@ -1,3 +1,4 @@
+use crate::rpolarserr::RResult;
 use extendr_api::prelude::*;
 
 #[extendr]
@@ -24,9 +25,17 @@ fn thread_pool_size() -> usize {
     polars_core::POOL.current_num_threads()
 }
 
+#[extendr]
+fn set_package_name(name: &str) -> RResult<()> {
+    crate::R_PACKAGE_NAME
+        .set(name.to_string())
+        .map_err(|err| polars::prelude::polars_err!(ComputeError: err).into())
+}
+
 extendr_module! {
     mod info;
     fn cargo_rpolars_feature_info;
     fn rust_polars_version;
     fn thread_pool_size;
+    fn set_package_name;
 }
